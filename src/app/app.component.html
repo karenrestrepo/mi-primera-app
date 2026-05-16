@@ -15,7 +15,6 @@
   <!-- Estado: Datos cargados -->
   <div *ngIf="!cargando && !error">
     <p class="contador">Total de usuarios: <strong>{{ usuarios.length }}</strong></p>
-
     <table>
       <thead>
       <tr>
@@ -32,11 +31,48 @@
         <td>{{ usuario.id }}</td>
         <td>{{ usuario.name }}</td>
         <td>@{{ usuario.username }}</td>
-        <td>
-          <a [href]="'mailto:' + usuario.email">{{ usuario.email }}</a>
-        </td>
+        <td><a [href]="'mailto:' + usuario.email">{{ usuario.email }}</a></td>
         <td>{{ usuario.phone }}</td>
         <td>{{ usuario.company.name }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECCIÓN POSTS -->
+<div class="container">
+  <h2>📝 Lista de Posts</h2>
+  <p class="subtitulo">Datos consumidos desde JSONPlaceholder API</p>
+
+  <!-- Estado: Cargando -->
+  <div *ngIf="cargandoPosts()" class="estado-cargando">
+    ⏳ Cargando posts...
+  </div>
+
+  <!-- Estado: Error -->
+  <div *ngIf="errorPosts()" class="estado-error">
+    ❌ {{ errorPosts() }}
+  </div>
+
+  <!-- Estado: Datos cargados -->
+  <div *ngIf="!cargandoPosts() && !errorPosts()">
+    <p class="contador">Total de posts: <strong>{{ posts().length }}</strong></p>
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Título</th>
+        <th>Cuerpo</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let post of posts()">
+        <td>{{ post.id }}</td>
+        <td>{{ post.userId }}</td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.body }}</td>
       </tr>
       </tbody>
     </table>
